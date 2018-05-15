@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:src="@drawable/ic_yts_logo_green"
+        android:padding="16dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/logo" />
+
+    <TextView
+        android:id="@+id/txt_about_top"
+        android:text="@string/about_message"
+        android:autoLink="all"
+        android:padding="16dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/grey_light"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/txt_about_web"
+        android:text="@string/about_web"
+        android:autoLink="web"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/grey_light"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/txt_about_dev"
+        android:text="@string/about_developer"
+        android:autoLink="all"
+        android:padding="16dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

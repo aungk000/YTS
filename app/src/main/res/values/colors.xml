@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4caf50</color>
+    <color name="colorPrimaryDark">#388e3c</color>
+    <color name="colorAccent">#6ac045</color>
+
+    <!-- Dark theme-->
+    <color name="darkPrimary">#203040</color>
+    <color name="darkPrimaryDark">#101820</color>
+    <color name="darkPopup">#424242</color>
+
+    <!-- Light theme -->
+    <color name="lightPrimary">#f5f5f5</color>
+    <color name="lightPrimaryDark">#e0e0e0</color>
+    <color name="lightPopup">#fff</color>
+
+    <!-- Drawer navigation -->
+    <color name="navigationItemText">#e8e8e8</color>
+    <color name="navigationItemIcon">#708088</color>
+    <color name="navigationBackground">#203040</color>
+
+    <color name="white">#fff</color>
+    <color name="grey">#9e9e9e</color>
+    <color name="grey_light">#e2e2e2</color>
+    <color name="black">#000</color>
+    <color name="grey_blue">#37474f</color>
+    <color name="grey_blue_dark">#263238</color>
+</resources>

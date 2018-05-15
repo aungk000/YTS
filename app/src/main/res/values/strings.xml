@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">YTS</string>
+
+    <string name="title">Title</string>
+    <string name="year">Year</string>
+    <string name="rating">Rating</string>
+    <string name="runtime">Runtime</string>
+    <string name="genre">Genre</string>
+    <string name="cover_image">Cover Image</string>
+
+    <!-- navigation drawer -->
+    <string name="home">Home</string>
+    <string name="category">Category</string>
+    <string name="p720">720p</string>
+    <string name="p1080">1080p</string>
+    <string name="p3d">3D</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <!-- settings -->
+    <string name="pref_key_light_theme">key.LIGHT_THEME</string>
+
+    <!-- about -->
+    <string name="about">About</string>
+    <string name="logo">Logo</string>
+    <string name="about_message">
+        HD movies at the smallest file size\n
+        For more information visit <a href="https://yts.ag">YTS.AG</a></string>
+    <string name="about_web"> Website includes:\n\n
+        <b>Account registration\n
+            IMDB movie reviews\n
+            Rotten Tomatoes ratings\n
+            Interactive mobile UI\n
+            Movie requests\n
+            Movie bookmarks\n
+            Movie suggestions\n
+            Effective search\n
+            YTS blog\n
+            Comments, Likes and Reports
+        </b>
+    </string>
+    <string name="pref_key">me.aungkooo.ytsag.PREF_KEY</string>
+    <string name="more">More</string>
+    <string name="about_developer">Friendly developed by m.me/aungk000</string>
+    <string name="settings">Settings</string>
+
+</resources>
