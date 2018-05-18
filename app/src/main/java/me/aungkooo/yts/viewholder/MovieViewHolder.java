@@ -1,25 +1,47 @@
 package me.aungkooo.yts.viewholder;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import me.aungkooo.yts.Base;
 import me.aungkooo.yts.R;
+import me.aungkooo.yts.model.Movie;
 
 
-public class MovieViewHolder extends RecyclerView.ViewHolder
+public class MovieViewHolder extends Base.RecyclerViewHolder<Movie> implements View.OnClickListener
 {
-    public TextView txtTitle, txtYear;
-    public View view;
-    public ImageView imgCover;
+    @BindView(R.id.txt_title) TextView txtTitle;
+    @BindView(R.id.txt_year) TextView txtYear;
+    @BindView(R.id.img_cover_small) public ImageView imgCover;
 
-    public MovieViewHolder(View itemView)
+    public MovieViewHolder(View itemView, Context context) {
+        super(itemView, context);
+        ButterKnife.bind(this, itemView);
+        itemView.setOnClickListener(this);
+    }
+
+    @Override
+    public void onBind(ArrayList<Movie> itemList)
     {
-        super(itemView);
-        view = itemView;
-        txtTitle = (TextView) itemView.findViewById(R.id.txt_title);
-        txtYear = (TextView) itemView.findViewById(R.id.txt_year);
-        imgCover = (ImageView) itemView.findViewById(R.id.img_cover_small);
+        Movie movie = getItem(itemList);
+
+        txtTitle.setText(movie.getTitle());
+        txtYear.setText(String.valueOf(movie.getYear()));
+
+        Picasso.with(getContext()).load(movie.getMediumCoverImage()).into(imgCover);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

@@ -15,13 +15,13 @@ public class MovieResponse
     @SerializedName("page_number")
     private String pageNumber;
     @SerializedName("movies")
-    private ArrayList<Movie> results;
+    private ArrayList<Movie> movies;
 
-    public MovieResponse(String movieCount, String limit, String pageNumber, ArrayList<Movie> results) {
+    public MovieResponse(String movieCount, String limit, String pageNumber, ArrayList<Movie> movies) {
         this.movieCount = movieCount;
         this.limit = limit;
         this.pageNumber = pageNumber;
-        this.results = results;
+        this.movies = movies;
     }
 
     public String getMovieCount() {
@@ -36,7 +36,7 @@ public class MovieResponse
         return pageNumber;
     }
 
-    public ArrayList<Movie> getResults() {
-        return results;
+    public ArrayList<Movie> getMovies() {
+        return movies;
     }
 }

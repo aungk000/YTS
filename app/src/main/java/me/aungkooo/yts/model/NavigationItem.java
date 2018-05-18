@@ -3,7 +3,7 @@ package me.aungkooo.yts.model;
 
 import android.support.annotation.DrawableRes;
 
-public class NavigationItem
+public class NavigationItem implements Selectable
 {
     private String title;
     private int icon;
@@ -31,10 +31,12 @@ public class NavigationItem
         this.icon = icon;
     }
 
+    @Override
     public boolean isSelected() {
         return selected;
     }
 
+    @Override
     public void setSelected(boolean selected) {
         this.selected = selected;
     }

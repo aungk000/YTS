@@ -160,9 +160,9 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
                 if(response.isSuccessful())
                 {
                     MovieResponse movieResponse = response.body().getMovieResponses();
-                    ArrayList<Movie> resultList =  movieResponse.getResults();
+                    ArrayList<Movie> resultList =  movieResponse.getMovies();
 
-                    adapterPopular.setMovieList(resultList);
+                    adapterPopular.set(resultList);
                 }
             }
 
@@ -208,9 +208,9 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
         if(response.isSuccessful())
         {
             MovieResponse movieResponse = response.body().getMovieResponses();
-            ArrayList<Movie> resultList =  movieResponse.getResults();
+            ArrayList<Movie> resultList =  movieResponse.getMovies();
 
-            adapterMain.setMovieList(resultList);
+            adapterMain.set(resultList);
 
             if (refreshLayout.isRefreshing()) {
                 refreshLayout.setRefreshing(false);

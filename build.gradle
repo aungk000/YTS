@@ -30,4 +30,7 @@ ext {
     buildVersion = '27.0.2'
     retrofitVersion = '2.4.0'
     butterknifeVersion = '8.8.1'
+    picassoVersion = '2.5.2'
+    gsonVersion = '2.8.2'
+    okhttpVersion = '3.9.1'
 }

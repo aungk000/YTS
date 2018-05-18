@@ -2,16 +2,11 @@ package me.aungkooo.yts;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.annotation.StyleRes;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -35,6 +30,11 @@ public abstract class Base
     public static abstract class Activity extends AppCompatActivity
     {
         private ProgressDialog progressDialog;
+
+        public boolean isNetworkAvailable()
+        {
+            return Utility.isNetworkAvailable(this);
+        }
 
         public void setActionBarIcon(@DrawableRes int resId)
         {
@@ -77,41 +77,23 @@ public abstract class Base
 
         public void changeActivity(Class to)
         {
-            Intent intent = new Intent(this, to);
-            if(intent.resolveActivity(getPackageManager()) != null)
-            {
-                startActivity(intent);
-            }
+            Utility.changeActivity(this, to);
         }
 
         public void changeActivityWithTransition(Class to, View sharedView,
                                                         String transitionName)
         {
-            Intent intent = new Intent(this, to);
-            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    this,
-                    sharedView,
-                    transitionName
-            );
-
-            if(intent.resolveActivity(getPackageManager()) != null)
-            {
-                startActivity(intent, options.toBundle());
-            }
+            Utility.changeActivityWithTransition(this, to, sharedView, transitionName);
         }
 
         public void changeFragment(int containerId, Fragment fragment)
         {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(containerId, fragment)
-                    .commit();
+            Utility.changeFragment(this, containerId, fragment);
         }
 
         public void addFragment(int containerId, Fragment fragment)
         {
-            getSupportFragmentManager().beginTransaction()
-                    .add(containerId, fragment)
-                    .commit();
+            Utility.addFragment(this, containerId, fragment);
         }
 
         public void showProgressDialog(String message)
@@ -125,7 +107,6 @@ public abstract class Base
             }
 
             progressDialog.setMessage(message);
-
             progressDialog.show();
         }
 
@@ -139,9 +120,7 @@ public abstract class Base
 
         public void makeShortSnackbar(View view, String message)
         {
-            Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
-            snackbar.getView().setBackgroundColor(getColor(R.color.colorPrimary));
-            snackbar.show();
+            Utility.makeShortSnackbar(this, view, message);
         }
     }
 
@@ -149,6 +128,7 @@ public abstract class Base
     {
         private Context context;
         private ArrayList<OBJ> itemList;
+        private View layoutView;
 
         public RecyclerAdapter(Context context, ArrayList<OBJ> itemList) {
             this.context = context;
@@ -157,7 +137,8 @@ public abstract class Base
 
         public View createView(@LayoutRes int resource, @Nullable ViewGroup parent)
         {
-            return LayoutInflater.from(context).inflate(resource, parent, false);
+            layoutView = LayoutInflater.from(context).inflate(resource, parent, false);
+            return layoutView;
         }
 
         @Override
@@ -173,10 +154,39 @@ public abstract class Base
             return context;
         }
 
+        public View getLayoutView() {
+            return layoutView;
+        }
+
+        public void set(ArrayList<OBJ> itemList)
+        {
+            this.itemList.clear();
+            this.itemList.addAll(itemList);
+            notifyDataSetChanged();
+        }
+
         public void add(OBJ item)
         {
             itemList.add(item);
             notifyDataSetChanged();
+        }
+
+        public void add(OBJ item, int position)
+        {
+            itemList.add(position, item);
+            notifyItemInserted(position);
+        }
+
+        public void remove(OBJ item)
+        {
+            itemList.remove(item);
+            notifyDataSetChanged();
+        }
+
+        public void remove(int position)
+        {
+            itemList.remove(position);
+            notifyItemRemoved(position);
         }
     }
 
