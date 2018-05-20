@@ -31,23 +31,18 @@ public abstract class Base
     {
         private ProgressDialog progressDialog;
 
-        public boolean isNetworkAvailable()
-        {
+        public boolean isNetworkAvailable() {
             return Utility.isNetworkAvailable(this);
         }
 
-        public void setActionBarIcon(@DrawableRes int resId)
-        {
-            if(getSupportActionBar() != null)
-            {
+        public void setActionBarIcon(@DrawableRes int resId) {
+            if(getSupportActionBar() != null) {
                 getSupportActionBar().setIcon(resId);
             }
         }
 
-        public void setActionBarLogo(@DrawableRes int resId)
-        {
-            if(getSupportActionBar() != null)
-            {
+        public void setActionBarLogo(@DrawableRes int resId) {
+            if(getSupportActionBar() != null) {
                 getSupportActionBar().setLogo(resId);
                 getSupportActionBar().setDisplayOptions(
                         ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_USE_LOGO);
@@ -75,31 +70,24 @@ public abstract class Base
             toolbar.setNavigationIcon(R.drawable.ic_arrow);
         }
 
-        public void changeActivity(Class to)
-        {
+        public void changeActivity(Class to) {
             Utility.changeActivity(this, to);
         }
 
-        public void changeActivityWithTransition(Class to, View sharedView,
-                                                        String transitionName)
-        {
+        public void changeActivityWithTransition(Class to, View sharedView, String transitionName) {
             Utility.changeActivityWithTransition(this, to, sharedView, transitionName);
         }
 
-        public void changeFragment(int containerId, Fragment fragment)
-        {
+        public void changeFragment(int containerId, Fragment fragment) {
             Utility.changeFragment(this, containerId, fragment);
         }
 
-        public void addFragment(int containerId, Fragment fragment)
-        {
+        public void addFragment(int containerId, Fragment fragment) {
             Utility.addFragment(this, containerId, fragment);
         }
 
-        public void showProgressDialog(String message)
-        {
-            if(progressDialog == null)
-            {
+        public void showProgressDialog(String message) {
+            if(progressDialog == null) {
                 progressDialog = new ProgressDialog(this, R.style.DarkTheme_Dialog);
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 progressDialog.setIndeterminate(true);
@@ -110,17 +98,10 @@ public abstract class Base
             progressDialog.show();
         }
 
-        public void stopProgressDialog()
-        {
-            if(progressDialog != null && progressDialog.isShowing())
-            {
+        public void stopProgressDialog() {
+            if(progressDialog != null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
             }
-        }
-
-        public void makeShortSnackbar(View view, String message)
-        {
-            Utility.makeShortSnackbar(this, view, message);
         }
     }
 
@@ -129,6 +110,11 @@ public abstract class Base
         private Context context;
         private ArrayList<OBJ> itemList;
         private View layoutView;
+
+        public RecyclerAdapter(Context context) {
+            this.context = context;
+            this.itemList = new ArrayList<>();
+        }
 
         public RecyclerAdapter(Context context, ArrayList<OBJ> itemList) {
             this.context = context;
@@ -158,11 +144,13 @@ public abstract class Base
             return layoutView;
         }
 
-        public void set(ArrayList<OBJ> itemList)
-        {
-            this.itemList.clear();
-            this.itemList.addAll(itemList);
+        public void setItemList(ArrayList<OBJ> itemList) {
+            this.itemList = itemList;
             notifyDataSetChanged();
+        }
+
+        public boolean isEmpty() {
+            return itemList.isEmpty();
         }
 
         public void add(OBJ item)

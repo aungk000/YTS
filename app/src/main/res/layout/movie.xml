@@ -25,7 +25,7 @@
             android:contentDescription="@string/cover_image" />
 
         <TextView
-            android:maxLines="1"
+            android:singleLine="true"
             android:ellipsize="marquee"
             android:textColor="@color/black"
             android:textSize="16sp"

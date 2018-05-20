@@ -18,7 +18,7 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?selectableItemBackground"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorAccentDark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

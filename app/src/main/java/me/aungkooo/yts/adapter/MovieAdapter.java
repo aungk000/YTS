@@ -16,8 +16,8 @@ import me.aungkooo.yts.model.Movie;
 public class MovieAdapter extends Base.RecyclerAdapter<MovieViewHolder, Movie>
 {
 
-    public MovieAdapter(Context context, ArrayList<Movie> itemList) {
-        super(context, itemList);
+    public MovieAdapter(Context context) {
+        super(context);
     }
 
     @Override

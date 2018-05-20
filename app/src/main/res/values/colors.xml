@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4caf50</color>
-    <color name="colorPrimaryDark">#388e3c</color>
+    <color name="colorPrimary">#263238</color>
+    <color name="colorPrimaryDark">#263238</color>
     <color name="colorAccent">#6ac045</color>
+    <color name="colorAccentDark">#4caf50</color>
 
     <!-- Dark theme-->
     <color name="darkPrimary">#203040</color>

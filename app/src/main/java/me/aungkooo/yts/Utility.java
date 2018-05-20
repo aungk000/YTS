@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
@@ -64,13 +65,6 @@ public class Utility
                 .beginTransaction()
                 .add(containerId, fragment)
                 .commit();
-    }
-
-    public static void makeShortSnackbar(Context context, View view, String message)
-    {
-        Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
-        snackbar.getView().setBackgroundColor(context.getColor(R.color.colorPrimary));
-        snackbar.show();
     }
 
     public static void makeShortToast(Context context, String message)
