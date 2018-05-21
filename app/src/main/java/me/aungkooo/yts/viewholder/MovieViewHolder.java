@@ -1,7 +1,6 @@
 package me.aungkooo.yts.viewholder;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.aungkooo.yts.Base;
 import me.aungkooo.yts.R;
-import me.aungkooo.yts.model.Movie;
+import me.aungkooo.yts.api.entry.Movie;
 
 
 public class MovieViewHolder extends Base.RecyclerViewHolder<Movie> implements View.OnClickListener

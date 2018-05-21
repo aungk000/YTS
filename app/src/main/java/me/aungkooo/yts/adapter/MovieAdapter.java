@@ -5,12 +5,10 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-
 import me.aungkooo.yts.Base;
 import me.aungkooo.yts.R;
 import me.aungkooo.yts.viewholder.MovieViewHolder;
-import me.aungkooo.yts.model.Movie;
+import me.aungkooo.yts.api.entry.Movie;
 
 
 public class MovieAdapter extends Base.RecyclerAdapter<MovieViewHolder, Movie>

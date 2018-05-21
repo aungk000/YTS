@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import me.aungkooo.yts.Base;
 import me.aungkooo.yts.R;
-import me.aungkooo.yts.Utility;
 import me.aungkooo.yts.fragment.AboutFragment;
 
 
@@ -44,4 +43,17 @@ public class AboutActivity extends Base.Activity
                     .commit();
         }
     }
+
+    /*@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }*/
 }

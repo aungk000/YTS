@@ -28,7 +28,7 @@
     <string name="logo">Logo</string>
     <string name="about_message">
         HD movies at the smallest file size\n
-        For more information visit <a href="https://yts.ag">YTS.AG</a></string>
+        For more information visit <a href="https://yts.am">YTS.AM</a></string>
     <string name="about_web"> Website includes:\n\n
         <b>Account registration\n
             IMDB movie reviews\n
@@ -43,6 +43,6 @@
         </b>
     </string>
     <string name="more">More</string>
-    <string name="about_developer">Friendly developed by m.me/aungk000</string>
+    <string name="about_developer">Friendly developed by aungkooo.cs@gmail.com</string>
 
 </resources>

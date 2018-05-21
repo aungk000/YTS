@@ -56,8 +56,8 @@
         android:id="@+id/navigation_divider"
         android:layout_marginBottom="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_small"
-        android:background="@android:color/transparent"
+        android:background="@color/darkPrimaryDark"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="0.5dp"/>
 
 </LinearLayout>

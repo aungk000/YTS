@@ -1,12 +1,11 @@
-package me.aungkooo.yts.model;
+package me.aungkooo.yts.api.entry;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
-public class MovieResponse
+public class MovieList
 {
     @SerializedName("movie_count")
     private String movieCount;
@@ -17,7 +16,7 @@ public class MovieResponse
     @SerializedName("movies")
     private ArrayList<Movie> movies;
 
-    public MovieResponse(String movieCount, String limit, String pageNumber, ArrayList<Movie> movies) {
+    public MovieList(String movieCount, String limit, String pageNumber, ArrayList<Movie> movies) {
         this.movieCount = movieCount;
         this.limit = limit;
         this.pageNumber = pageNumber;

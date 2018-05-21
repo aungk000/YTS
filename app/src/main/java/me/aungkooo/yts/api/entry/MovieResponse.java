@@ -1,21 +1,21 @@
-package me.aungkooo.yts.model;
+package me.aungkooo.yts.api.entry;
 
 import com.google.gson.annotations.SerializedName;
 
 
-public class DataResponse
+public class MovieResponse
 {
     @SerializedName("status")
     private String status;
     @SerializedName("status_message")
     private String statusMessage;
     @SerializedName("data")
-    private MovieResponse movieResponses;
+    private Movie data;
 
-    public DataResponse(String status, String statusMessage, MovieResponse movieResponses) {
+    public MovieResponse(String status, String statusMessage, Movie data) {
         this.status = status;
         this.statusMessage = statusMessage;
-        this.movieResponses = movieResponses;
+        this.data = data;
     }
 
     public String getStatus() {
@@ -26,7 +26,7 @@ public class DataResponse
         return statusMessage;
     }
 
-    public MovieResponse getMovieResponses() {
-        return movieResponses;
+    public Movie getData() {
+        return data;
     }
 }

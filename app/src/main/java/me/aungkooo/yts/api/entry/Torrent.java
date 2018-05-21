@@ -1,4 +1,4 @@
-package me.aungkooo.yts.model;
+package me.aungkooo.yts.api.entry;
 
 
 import com.google.gson.annotations.SerializedName;

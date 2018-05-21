@@ -10,7 +10,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,10 +25,10 @@ import me.aungkooo.yts.R;
 import me.aungkooo.yts.Utility;
 import me.aungkooo.yts.adapter.MovieAdapter;
 import me.aungkooo.yts.api.ApiClient;
+import me.aungkooo.yts.api.entry.value.Quality;
 import me.aungkooo.yts.listener.OnNavigationItemClickedListener;
-import me.aungkooo.yts.model.DataResponse;
-import me.aungkooo.yts.model.Movie;
-import me.aungkooo.yts.model.MovieResponse;
+import me.aungkooo.yts.api.entry.Movie;
+import me.aungkooo.yts.api.entry.MovieListResponse;
 import me.aungkooo.yts.view.NavigationRecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,7 +58,8 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
     TextView txtLatestMovies;
 
     private MovieAdapter adapterMain, adapterPopular;
-    private String category = "all";
+    private String category = Quality.QUALITY_DEFAULT.getValue();
+    private boolean isCategoryChanged = false;
     private Snackbar snackbar;
 
     @Override
@@ -128,7 +128,7 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
 
     @Override
     public void onRefresh() {
-        if (Utility.isNetworkAvailable(this)) {
+        if (isNetworkAvailable()) {
             fetchPopularMovieList();
             fetchMovieList();
         }
@@ -144,11 +144,13 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
         switch (position) {
             case 0:
                 category = "all";
+                isCategoryChanged = true;
                 loadMovieList();
                 break;
 
             case 1:
-                category = "3d";
+                category = "3D";
+                isCategoryChanged = true;
                 loadMovieList();
                 break;
 
@@ -165,39 +167,30 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
     }
 
     public void fetchPopularMovieList() {
-        ApiClient.getService().getPopularMovieList().enqueue(new Callback<DataResponse>() {
+        ApiClient.getClient().getService()
+                .getMovieList("download_count", "desc").enqueue(new Callback<MovieListResponse>() {
             @Override
-            public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
+            public void onResponse(Call<MovieListResponse> call, Response<MovieListResponse> response) {
                 if (response.isSuccessful()) {
-                    MovieResponse movieResponse = response.body().getMovieResponses();
-                    ArrayList<Movie> resultList = movieResponse.getMovies();
+                    ArrayList<Movie> resultList = response.body().getData().getMovies();
 
                     adapterPopular.setItemList(resultList);
                 }
             }
 
             @Override
-            public void onFailure(Call<DataResponse> call, Throwable t) {
+            public void onFailure(Call<MovieListResponse> call, Throwable t) {
 
             }
         });
     }
 
     public void fetchMovieList() {
-        switch (category) {
-            case "all":
-                ApiClient.getService().getAllMovieList().enqueue(this);
-                break;
-
-            case "3d":
-                ApiClient.getService().get3DMovieList().enqueue(this);
-
-                break;
-        }
+        ApiClient.getClient().getService().getMovieList(category).enqueue(this);
     }
 
     public void loadMovieList() {
-        if (Utility.isNetworkAvailable(this)) {
+        if (isNetworkAvailable()) {
             showProgressDialog("Loading movies...");
 
             fetchPopularMovieList();
@@ -206,10 +199,9 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
     }
 
     @Override
-    public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
+    public void onResponse(Call<MovieListResponse> call, Response<MovieListResponse> response) {
         if (response.isSuccessful()) {
-            MovieResponse movieResponse = response.body().getMovieResponses();
-            ArrayList<Movie> resultList = movieResponse.getMovies();
+            ArrayList<Movie> resultList = response.body().getData().getMovies();
 
             adapterMain.setItemList(resultList);
 
@@ -222,7 +214,7 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
     }
 
     @Override
-    public void onFailure(Call<DataResponse> call, Throwable t) {
+    public void onFailure(Call<MovieListResponse> call, Throwable t) {
 
     }
 
@@ -230,10 +222,17 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
     public void onNetworkAvailable() {
         toggleSnackbar(false);
         toggleLabel(true);
-
-        if (adapterMain.isEmpty() || adapterPopular.isEmpty()) {
+        
+        if(adapterPopular.isEmpty()) {
             fetchPopularMovieList();
             fetchMovieList();
+        }
+
+        if(isCategoryChanged) {
+            fetchPopularMovieList();
+            fetchMovieList();
+
+            isCategoryChanged = false;
         }
     }
 
