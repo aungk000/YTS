@@ -22,7 +22,6 @@ import me.aungkooo.thunder.NetworkListener;
 import me.aungkooo.thunder.Thunder;
 import me.aungkooo.yts.Base;
 import me.aungkooo.yts.R;
-import me.aungkooo.yts.Utility;
 import me.aungkooo.yts.adapter.MovieAdapter;
 import me.aungkooo.yts.api.ApiClient;
 import me.aungkooo.yts.api.entry.value.Quality;
@@ -71,6 +70,10 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isLightTheme = preferences.getBoolean(getString(R.string.pref_key_light_theme), false);
 
+        setSupportActionBar(toolbar);
+        setActionBarLogo(R.drawable.ic_yts_logo_green);
+        setActionBarDrawerToggle(drawerLayout, toolbar);
+
         setupOnCreate();
 
         refreshLayout.setOnRefreshListener(this);
@@ -81,10 +84,6 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
 
     public void setupOnCreate()
     {
-        setSupportActionBar(toolbar);
-        setActionBarLogo(R.drawable.ic_yts_logo_green);
-        setActionBarDrawerToggle(drawerLayout, toolbar);
-
         refreshLayout.setColorSchemeColors(getColor(R.color.colorAccent));
         refreshLayout.setProgressBackgroundColorSchemeColor(getColor(R.color.colorPrimaryDark));
 
@@ -220,10 +219,10 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
 
     @Override
     public void onNetworkAvailable() {
-        toggleSnackbar(false);
-        toggleLabel(true);
+        showSnackbar(false);
+        showLabel(true);
         
-        if(adapterPopular.isEmpty()) {
+        if(adapterPopular.isEmpty() || adapterMain.isEmpty()) {
             fetchPopularMovieList();
             fetchMovieList();
         }
@@ -238,14 +237,14 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
 
     @Override
     public void onNetworkUnavailable() {
-        toggleSnackbar(true);
+        showSnackbar(true);
 
         if (adapterMain.isEmpty() && adapterPopular.isEmpty()) {
-            toggleLabel(false);
+            showLabel(false);
         }
     }
 
-    public void toggleSnackbar(boolean show)
+    public void showSnackbar(boolean show)
     {
         if(snackbar == null) {
             snackbar = Snackbar.make(refreshLayout, R.string.no_internet_connection,
@@ -265,7 +264,7 @@ public class MainActivity extends Base.Activity implements SwipeRefreshLayout.On
         }
     }
 
-    public void toggleLabel(boolean show)
+    public void showLabel(boolean show)
     {
         if(show) {
             if (txtPopularDownloads.getVisibility() == View.GONE

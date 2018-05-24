@@ -4,20 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
-import java.security.InvalidParameterException;
-
 /**
  * Created by Ko Oo on 19/5/2018.
  */
 
 public class Thunder
 {
-    private Context context;
+    private final Context context;
     private Intent networkIntent;
     private NetworkReceiver networkReceiver;
     private IntentFilter intentFilter;
 
-    private static volatile Thunder instance = null;
+    private static volatile Thunder instance;
 
     private Thunder(Context context, Intent networkIntent, NetworkReceiver networkReceiver,
                     IntentFilter intentFilter)
@@ -38,23 +36,25 @@ public class Thunder
         return instance;
     }
 
-    public static class Builder
+    private static class Builder
     {
-        private Context context;
+        private final Context context;
         private Intent networkIntent;
         private NetworkReceiver networkReceiver;
         private IntentFilter intentFilter;
 
-        public Builder(Context context) {
+        private Builder(Context context) {
             if(context == null) {
-                throw new InvalidParameterException("Context must not be null");
+                throw new IllegalArgumentException("Context must not be null");
             }
 
-            this.context = context;
+            this.context = context.getApplicationContext();
         }
 
-        public Thunder build()
+        private Thunder build()
         {
+            Context context = this.context;
+
             if(networkIntent == null) {
                 networkIntent = new Intent(context, NetworkService.class);
             }
@@ -82,7 +82,6 @@ public class Thunder
     }
 
     public void stop() {
-        networkReceiver.stop();
         context.unregisterReceiver(networkReceiver);
         context.stopService(networkIntent);
     }
